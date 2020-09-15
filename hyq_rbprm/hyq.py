@@ -16,20 +16,21 @@
 # hpp_tutorial.  If not, see
 # <http://www.gnu.org/licenses/>.
 
+import numpy as np
+
 from hpp.corbaserver.rbprm.rbprmfullbody import FullBody as Parent
 from pinocchio import SE3, Quaternion
-import numpy as np
 
 
 class Robot(Parent):
     ##
     #  Information to retrieve urdf and srdf files.
     name = "hyq"
-    packageName = "hyq_description"
+    packageName = "example-robot-data/robots/hyq_description"
     meshPackageName = "hyq_description"
     rootJointType = "freeflyer"
     urdfName = "hyq"
-    urdfSuffix = ""
+    urdfSuffix = "_no_sensors"
     srdfSuffix = ""
 
     ## Information about the names of thes joints defining the limbs of the robot
@@ -68,12 +69,26 @@ class Robot(Parent):
         1.5707963267948966,
     ]
 
-    postureWeights=[0,0,0,0,0,0, #FF
-    100.,1.,20.,# LF
-    100.,1.,20.,# LH
-    100.,1.,20.,# RF
-    100.,1.,20.,]# RH
-
+    postureWeights = [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,  #FF
+        100.,
+        1.,
+        20.,  # LF
+        100.,
+        1.,
+        20.,  # LH
+        100.,
+        1.,
+        20.,  # RF
+        100.,
+        1.,
+        20.,
+    ]  # RH
 
     # informations required to generate the limbs databases the limbs :
     nbSamples = 50000
@@ -92,12 +107,12 @@ class Robot(Parent):
     # data used by scripts :
     limbs_names = [rLegId, lLegId, rArmId, lArmId]
     dict_limb_joint = {rLegId: rfoot, lLegId: lfoot, rArmId: rhand, lArmId: lhand}
-    dict_limb_rootJoint = {rLegId:rleg, lLegId:lleg, rArmId:rarm, lArmId:larm}
+    dict_limb_rootJoint = {rLegId: rleg, lLegId: lleg, rArmId: rarm, lArmId: larm}
     dict_limb_color_traj = {rfoot: [0, 1, 0, 1], lfoot: [1, 0, 0, 1], rhand: [0, 0, 1, 1], lhand: [0.9, 0.5, 0, 1]}
     FOOT_SAFETY_SIZE = 0.01
     # size of the contact surface (x,y)
     dict_size = {rfoot: [0.02, 0.02], lfoot: [0.02, 0.02], rhand: [0.02, 0.02], lhand: [0.02, 0.02]}
-    dict_normal = {rfoot:normal, lfoot:normal, rhand:normal, lhand:normal}
+    dict_normal = {rfoot: normal, lfoot: normal, rhand: normal, lhand: normal}
     #various offset used by scripts
     MRsole_offset = SE3.Identity()
     MRsole_offset.translation = np.matrix(offset).T
@@ -119,13 +134,13 @@ class Robot(Parent):
         Parent.__init__(self, self.name, self.rootJointType, load, client, None, clientRbprm)
 
     def loadAllLimbs(self, heuristic, analysis=None, nbSamples=nbSamples, octreeSize=octreeSize):
-        if isinstance(heuristic,str):#only one heuristic name given assign it to all the limbs
+        if isinstance(heuristic, str):  #only one heuristic name given assign it to all the limbs
             dict_heuristic = {}
             for id in self.limbs_names:
-                dict_heuristic.update({id:heuristic})
-        elif isinstance(heuristic,dict):
-            dict_heuristic=heuristic
-        else : 
+                dict_heuristic.update({id: heuristic})
+        elif isinstance(heuristic, dict):
+            dict_heuristic = heuristic
+        else:
             raise Exception("heuristic should be either a string or a map limbId:string")
         for id in self.limbs_names:
             eff = self.dict_limb_joint[id]
@@ -145,4 +160,3 @@ class Robot(Parent):
                          kinematicConstraintsMin=self.minDist)
             if analysis:
                 self.runLimbSampleAnalysis(id, analysis, True)
-
