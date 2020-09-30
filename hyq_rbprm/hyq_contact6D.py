@@ -16,13 +16,13 @@
 # hpp_tutorial.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-from hpp.corbaserver.rbprm.rbprmfullbody import FullBody as Parent
-from pinocchio import SE3, Quaternion
 import numpy as np
+
+from hpp.corbaserver.rbprm.rbprmfullbody import FullBody as Parent
+from pinocchio import SE3
 
 
 class Robot(Parent):
-    ##
     #  Information to retrieve urdf and srdf files.
     name = "hyq"
     packageName = "hyq_description"
@@ -32,7 +32,7 @@ class Robot(Parent):
     urdfSuffix = "_contact6D"
     srdfSuffix = ""
 
-    ## Information about the names of thes joints defining the limbs of the robot
+    # Information about the names of thes joints defining the limbs of the robot
     rLegId = 'rfleg'
     rleg = 'rf_haa_joint'
     rfoot = 'rf_foot_Z'
@@ -100,7 +100,7 @@ class Robot(Parent):
     # size of the contact surface (x,y)
     dict_size = {rfoot: [0.04, 0.04], lfoot: [0.04, 0.04], rhand: [0.04, 0.04], lhand: [0.04, 0.04]}
 
-    #various offset used by scripts
+    # various offset used by scripts
     MRsole_offset = SE3.Identity()
     MRsole_offset.translation = np.matrix(offset).T
     MLsole_offset = MRsole_offset.copy()

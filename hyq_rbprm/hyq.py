@@ -19,11 +19,10 @@
 import numpy as np
 
 from hpp.corbaserver.rbprm.rbprmfullbody import FullBody as Parent
-from pinocchio import SE3, Quaternion
+from pinocchio import SE3
 
 
 class Robot(Parent):
-    ##
     #  Information to retrieve urdf and srdf files.
     name = "hyq"
     packageName = "example-robot-data/robots/hyq_description"
@@ -33,7 +32,7 @@ class Robot(Parent):
     urdfSuffix = "_no_sensors"
     srdfSuffix = ""
 
-    ## Information about the names of thes joints defining the limbs of the robot
+    # Information about the names of thes joints defining the limbs of the robot
     rLegId = 'rfleg'
     rleg = 'rf_haa_joint'
     rfoot = 'rf_foot_joint'
@@ -75,7 +74,7 @@ class Robot(Parent):
         0,
         0,
         0,
-        0,  #FF
+        0,  # FF
         100.,
         1.,
         20.,  # LF
@@ -113,7 +112,7 @@ class Robot(Parent):
     # size of the contact surface (x,y)
     dict_size = {rfoot: [0.02, 0.02], lfoot: [0.02, 0.02], rhand: [0.02, 0.02], lhand: [0.02, 0.02]}
     dict_normal = {rfoot: normal, lfoot: normal, rhand: normal, lhand: normal}
-    #various offset used by scripts
+    # various offset used by scripts
     MRsole_offset = SE3.Identity()
     MRsole_offset.translation = np.matrix(offset).T
     MLsole_offset = MRsole_offset.copy()
@@ -134,7 +133,7 @@ class Robot(Parent):
         Parent.__init__(self, self.name, self.rootJointType, load, client, None, clientRbprm)
 
     def loadAllLimbs(self, heuristic, analysis=None, nbSamples=nbSamples, octreeSize=octreeSize):
-        if isinstance(heuristic, str):  #only one heuristic name given assign it to all the limbs
+        if isinstance(heuristic, str):  # aonly one heuristic name given assign it to all the limbs
             dict_heuristic = {}
             for id in self.limbs_names:
                 dict_heuristic.update({id: heuristic})
