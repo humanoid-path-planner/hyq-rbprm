@@ -31,6 +31,7 @@ class Robot(Parent):
     urdfName = "hyq"
     urdfSuffix = "_no_sensors"
     srdfSuffix = ""
+    urdfDir = "robots"
 
     # Information about the names of thes joints defining the limbs of the robot
     rLegId = 'rfleg'
