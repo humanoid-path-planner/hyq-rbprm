@@ -1,8 +1,5 @@
-import quaternion as quat
 from hpp.corbaserver.rbprm.problem_solver import ProblemSolver
-from hpp.corbaserver.rbprm.rbprmbuilder import Builder
 from hpp.corbaserver.rbprm.rbprmfullbody import FullBody
-from hpp.gepetto import Viewer
 
 packageName = "hyq_description"
 meshPackageName = "hyq_description"

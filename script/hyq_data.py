@@ -1,5 +1,5 @@
 from hpp.corbaserver.rbprm.rbprmfullbody import FullBody
-from hpp.corbaserver.rbprm.tools.plot_analytics import plotOctreeValues
+# from hpp.corbaserver.rbprm.tools.plot_analytics import plotOctreeValues
 
 packageName = "hyq_description"
 meshPackageName = "hyq_description"
