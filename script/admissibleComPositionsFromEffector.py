@@ -5,9 +5,7 @@ from __future__ import print_function
 import numpy as np
 
 import quaternion as quat
-from hpp.corbaserver.rbprm.rbprmbuilder import Builder
 from hpp.corbaserver.rbprm.rbprmfullbody import FullBody
-from hpp.gepetto import Viewer
 
 packageName = "hyq_description"
 meshPackageName = "hyq_description"
@@ -114,8 +112,8 @@ def printComPosition(nbConfigs):
                 p = qEffector[0:3]  # (0,0,0) coordinate expressed in effector fram
                 rm = np.zeros((4, 4))
                 for k in range(0, 3):
-                    for l in range(0, 3):
-                        rm[k, l] = rot[k, l]
+                    for m in range(0, 3):
+                        rm[k, m] = rot[k, m]
                 for m in range(0, 3):
                     rm[m, 3] = qEffector[m]
                 rm[3, 3] = 1
