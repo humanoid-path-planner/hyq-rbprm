@@ -22,13 +22,13 @@ from hpp.corbaserver.rbprm.rbprmbuilder import Builder as Parent
 class Robot(Parent):
     ##
     #  Information to retrieve urdf and srdf files.
-    rootJointType = 'freeflyer'
-    packageName = 'hyq-rbprm'
-    meshPackageName = 'hyq-rbprm'
+    rootJointType = "freeflyer"
+    packageName = "hyq-rbprm"
+    meshPackageName = "hyq-rbprm"
     # URDF file describing the trunk of the robot HyQ
-    urdfName = 'hyq_trunk_large'
+    urdfName = "hyq_trunk_large"
     # URDF files describing the reachable workspace of each limb of HyQ
-    urdfNameRom = ['hyq_lhleg_rom', 'hyq_lfleg_rom', 'hyq_rfleg_rom', 'hyq_rhleg_rom']
+    urdfNameRom = ["hyq_lhleg_rom", "hyq_lfleg_rom", "hyq_rfleg_rom", "hyq_rhleg_rom"]
     urdfSuffix = ""
     srdfSuffix = ""
     name = urdfName
@@ -43,8 +43,10 @@ class Robot(Parent):
     def __init__(self, name=None, load=True, client=None, clientRbprm=None):
         if name is not None:
             self.name = name
-        Parent.__init__(self, self.name, self.rootJointType, load, client, None, clientRbprm)
-        self.setReferenceEndEffector('hyq_lfleg_rom', self.ref_EE_lLeg)
-        self.setReferenceEndEffector('hyq_rfleg_rom', self.ref_EE_rLeg)
-        self.setReferenceEndEffector('hyq_lhleg_rom', self.ref_EE_lArm)
-        self.setReferenceEndEffector('hyq_rhleg_rom', self.ref_EE_rArm)
+        Parent.__init__(
+            self, self.name, self.rootJointType, load, client, None, clientRbprm
+        )
+        self.setReferenceEndEffector("hyq_lfleg_rom", self.ref_EE_lLeg)
+        self.setReferenceEndEffector("hyq_rfleg_rom", self.ref_EE_rLeg)
+        self.setReferenceEndEffector("hyq_lhleg_rom", self.ref_EE_lArm)
+        self.setReferenceEndEffector("hyq_rhleg_rom", self.ref_EE_rArm)
