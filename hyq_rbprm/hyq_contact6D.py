@@ -33,27 +33,27 @@ class Robot(Parent):
     srdfSuffix = ""
 
     # Information about the names of thes joints defining the limbs of the robot
-    rLegId = 'rfleg'
-    rleg = 'rf_haa_joint'
-    rfoot = 'rf_foot_Z'
-    lLegId = 'lfleg'
-    lleg = 'lf_haa_joint'
-    lfoot = 'lf_foot_Z'
-    lArmId = 'lhleg'
-    larm = 'lh_haa_joint'
-    lhand = 'lh_foot_Z'
-    rArmId = 'rhleg'
-    rarm = 'rh_haa_joint'
-    rhand = 'rh_foot_Z'
+    rLegId = "rfleg"
+    rleg = "rf_haa_joint"
+    rfoot = "rf_foot_Z"
+    lLegId = "lfleg"
+    lleg = "lf_haa_joint"
+    lfoot = "lf_foot_Z"
+    lArmId = "lhleg"
+    larm = "lh_haa_joint"
+    lhand = "lh_foot_Z"
+    rArmId = "rhleg"
+    rarm = "rh_haa_joint"
+    rhand = "rh_foot_Z"
 
     referenceConfig = [
-        0.,
-        0.,
+        0.0,
+        0.0,
         0.6,
-        0.,
-        0.,
-        0.,
-        1.,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
         0,  # LF
         0.7853981633974483,
         -1.5707963267948966,
@@ -82,7 +82,7 @@ class Robot(Parent):
 
     # informations required to generate the limbs databases the limbs :
 
-    offset = [0., 0., -0.021]
+    offset = [0.0, 0.0, -0.021]
     normal = [0, 0, 1]
     legx = 0.02
     legy = 0.02
@@ -95,10 +95,20 @@ class Robot(Parent):
     # data used by scripts :
     limbs_names = [rLegId, lLegId, rArmId, lArmId]
     dict_limb_joint = {rLegId: rfoot, lLegId: lfoot, rArmId: rhand, lArmId: lhand}
-    dict_limb_color_traj = {rfoot: [0, 1, 0, 1], lfoot: [1, 0, 0, 1], rhand: [0, 0, 1, 1], lhand: [0.9, 0.5, 0, 1]}
+    dict_limb_color_traj = {
+        rfoot: [0, 1, 0, 1],
+        lfoot: [1, 0, 0, 1],
+        rhand: [0, 0, 1, 1],
+        lhand: [0.9, 0.5, 0, 1],
+    }
     FOOT_SAFETY_SIZE = 0.01
     # size of the contact surface (x,y)
-    dict_size = {rfoot: [0.04, 0.04], lfoot: [0.04, 0.04], rhand: [0.04, 0.04], lhand: [0.04, 0.04]}
+    dict_size = {
+        rfoot: [0.04, 0.04],
+        lfoot: [0.04, 0.04],
+        rhand: [0.04, 0.04],
+        lhand: [0.04, 0.04],
+    }
 
     # various offset used by scripts
     MRsole_offset = SE3.Identity()
@@ -106,16 +116,28 @@ class Robot(Parent):
     MLsole_offset = MRsole_offset.copy()
     MRhand_offset = MRsole_offset.copy()
     MLhand_offset = MRsole_offset.copy()
-    dict_offset = {rfoot: MRsole_offset, lfoot: MLsole_offset, rhand: MRhand_offset, lhand: MLhand_offset}
+    dict_offset = {
+        rfoot: MRsole_offset,
+        lfoot: MLsole_offset,
+        rhand: MRhand_offset,
+        lhand: MLhand_offset,
+    }
 
     # display transform :
     MRsole_display = SE3.Identity()
     MLsole_display = SE3.Identity()
     MRhand_display = SE3.Identity()
     MLhand_display = SE3.Identity()
-    dict_display_offset = {rfoot: MRsole_display, lfoot: MLsole_display, rhand: MRhand_display, lhand: MLhand_display}
+    dict_display_offset = {
+        rfoot: MRsole_display,
+        lfoot: MLsole_display,
+        rhand: MRhand_display,
+        lhand: MLhand_display,
+    }
 
     def __init__(self, name=None, load=True, client=None, clientRbprm=None):
         if name is not None:
             self.name = name
-        Parent.__init__(self, self.name, self.rootJointType, load, client, None, clientRbprm)
+        Parent.__init__(
+            self, self.name, self.rootJointType, load, client, None, clientRbprm
+        )

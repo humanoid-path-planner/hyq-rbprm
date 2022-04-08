@@ -18,47 +18,88 @@ srdfSuffix = ""
 
 #  This time we load the full body model of HyQ
 fullBody = FullBody()
-fullBody.loadFullBodyModel(urdfName, rootJointType, meshPackageName, packageName, urdfSuffix, srdfSuffix)
+fullBody.loadFullBodyModel(
+    urdfName, rootJointType, meshPackageName, packageName, urdfSuffix, srdfSuffix
+)
 fullBody.setJointBounds("base_joint_xyz", [-20, 20, -20, 20, -20, 20])
 
 #  Setting a number of sample configurations used
 nbSamples = 100000
 
-rootName = 'base_joint_xyz'
+rootName = "base_joint_xyz"
 
 #  Creating limbs
 # cType is "_3_DOF": positional constraint, but no rotation (contacts are punctual)
 cType = "_6_DOF"
 # string identifying the limb
-rLegId = 'rfleg'
+rLegId = "rfleg"
 # First joint of the limb, as in urdf file
-rLeg = 'rf_haa_joint'
+rLeg = "rf_haa_joint"
 # Last joint of the limb, as in urdf file
-rfoot = 'rf_foot_Z'
+rfoot = "rf_foot_Z"
 # Specifying the distance between last joint and contact surface
-offset = [0., -0.021, 0.]
+offset = [0.0, -0.021, 0.0]
 # Specifying the contact surface direction when the limb is in rest pose
 normal = [0, 1, 0]
 # Specifying the rectangular contact surface length
 legx = 0.02
 legy = 0.02
-# remaining parameters are the chosen heuristic (here, manipulability), and the resolution of the octree (here, 10 cm).
-fullBody.addLimb(rLegId, rLeg, rfoot, offset, normal, legx, legy, nbSamples, "manipulability", 0.05, cType)
+# remaining parameters are the chosen heuristic (here, manipulability),
+# and the resolution of the octree (here, 10 cm).
+fullBody.addLimb(
+    rLegId,
+    rLeg,
+    rfoot,
+    offset,
+    normal,
+    legx,
+    legy,
+    nbSamples,
+    "manipulability",
+    0.05,
+    cType,
+)
 
-lLegId = 'lhleg'
-lLeg = 'lh_haa_joint'
-lfoot = 'lh_foot_Z'
-fullBody.addLimb(lLegId, lLeg, lfoot, offset, normal, legx, legy, nbSamples, "manipulability", 0.05, cType)
+lLegId = "lhleg"
+lLeg = "lh_haa_joint"
+lfoot = "lh_foot_Z"
+fullBody.addLimb(
+    lLegId,
+    lLeg,
+    lfoot,
+    offset,
+    normal,
+    legx,
+    legy,
+    nbSamples,
+    "manipulability",
+    0.05,
+    cType,
+)
 
-rarmId = 'rhleg'
-rarm = 'rh_haa_joint'
-rHand = 'rh_foot_Z'
-fullBody.addLimb(rarmId, rarm, rHand, offset, normal, legx, legy, nbSamples, "manipulability", 0.05, cType)
+rarmId = "rhleg"
+rarm = "rh_haa_joint"
+rHand = "rh_foot_Z"
+fullBody.addLimb(
+    rarmId,
+    rarm,
+    rHand,
+    offset,
+    normal,
+    legx,
+    legy,
+    nbSamples,
+    "manipulability",
+    0.05,
+    cType,
+)
 
-larmId = 'lfleg'
-larm = 'lf_haa_joint'
-lHand = 'lf_foot_Z'
-fullBody.addLimb(larmId, larm, lHand, offset, normal, legx, legy, nbSamples, "forward", 0.05, cType)
+larmId = "lfleg"
+larm = "lf_haa_joint"
+lHand = "lf_foot_Z"
+fullBody.addLimb(
+    larmId, larm, lHand, offset, normal, legx, legy, nbSamples, "forward", 0.05, cType
+)
 
 # make sure this is 0
 q_0 = fullBody.getCurrentConfig()
@@ -102,7 +143,7 @@ def printComPosition(nbConfigs):
         fullBody.setCurrentConfig(q)
         # print ("final com" + str(com))
         # print ("final com" + str(fullBody.getCenterOfMass()))
-        if (fullBody.isConfigValid(q)[0]):
+        if fullBody.isConfigValid(q)[0]:
             for j in range(0, len(effectors)):
                 effectorName = effectors[j]
                 # limbId = limbIds[j]
@@ -124,7 +165,7 @@ def printComPosition(nbConfigs):
         else:
             num_invalid += 1
     for j in range(0, len(limbIds)):
-        f1 = open('./' + str(limbIds[j]) + '_com.erom', 'w+')
+        f1 = open("./" + str(limbIds[j]) + "_com.erom", "w+")
         for p in points[j]:
             f1.write(str(p[0]) + "," + str(p[1]) + "," + str(p[2]) + "\n")
         f1.close()
