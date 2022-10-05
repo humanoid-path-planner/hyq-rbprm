@@ -1,37 +1,36 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.1)
+cmake_minimum_required(VERSION 3.1)
 
-SET(PROJECT_NAME hyq-rbprm)
-SET(PROJECT_DESCRIPTION "Database for hyq robot using hpp-rbprm")
-SET(PROJECT_URL "")
-SET(CUSTOM_HEADER_DIR "hpp/hyq-rbprm")
-SET(CXX_DISABLE_WERROR true)
-SET(PROJECT_USE_CMAKE_EXPORT TRUE)
+set(PROJECT_NAME hyq-rbprm)
+set(PROJECT_DESCRIPTION "Database for hyq robot using hpp-rbprm")
+set(PROJECT_URL "")
+set(CUSTOM_HEADER_DIR "hpp/hyq-rbprm")
+set(CXX_DISABLE_WERROR true)
+set(PROJECT_USE_CMAKE_EXPORT TRUE)
 
-INCLUDE(cmake/hpp.cmake)
-INCLUDE(cmake/python.cmake)
+include(cmake/hpp.cmake)
+include(cmake/python.cmake)
 
-COMPUTE_PROJECT_ARGS(PROJECT_ARGS LANGUAGES CXX)
-PROJECT(${PROJECT_NAME} ${PROJECT_ARGS})
+compute_project_args(PROJECT_ARGS LANGUAGES CXX)
+project(${PROJECT_NAME} ${PROJECT_ARGS})
 
-FINDPYTHON()
-ADD_PROJECT_DEPENDENCY(example-robot-data REQUIRED)
+findpython()
+add_project_dependency(example-robot-data REQUIRED)
 
-ADD_LIBRARY(${PROJECT_NAME} INTERFACE)
-INSTALL(TARGETS ${PROJECT_NAME} EXPORT ${TARGETS_EXPORT_NAME} DESTINATION lib)
+add_library(${PROJECT_NAME} INTERFACE)
+install(
+  TARGETS ${PROJECT_NAME}
+  EXPORT ${TARGETS_EXPORT_NAME}
+  DESTINATION lib)
 
 install(DIRECTORY data/ DESTINATION share/${PROJECT_NAME})
 
-STRING(REGEX REPLACE "-" "_" PY_NAME ${PROJECT_NAME})
+string(REGEX REPLACE "-" "_" PY_NAME ${PROJECT_NAME})
 
-SET(${PROJECT_NAME}_PYTHON_FILES
-  __init__.py
-  hyq.py
-  hyq_abstract.py
-  hyq_contact6D.py
-  )
+set(${PROJECT_NAME}_PYTHON_FILES __init__.py hyq.py hyq_abstract.py
+                                 hyq_contact6D.py)
 
-FOREACH(SOURCE ${${PROJECT_NAME}_PYTHON_FILES})
-  PYTHON_INSTALL_ON_SITE(${PY_NAME} ${SOURCE})
-ENDFOREACH(SOURCE ${${PROJECT_NAME}_PYTHON_SOURCES})
+foreach(SOURCE ${${PROJECT_NAME}_PYTHON_FILES})
+  python_install_on_site(${PY_NAME} ${SOURCE})
+endforeach(SOURCE ${${PROJECT_NAME}_PYTHON_SOURCES})
 
-INSTALL(FILES package.xml DESTINATION share/${PROJECT_NAME})
+install(FILES package.xml DESTINATION share/${PROJECT_NAME})
