@@ -6,3 +6,5 @@
 
 # obj_to_constraints: fix format (Guilhem Saurel, 2020-09-30)
 1e230fcafde3edd3ded8ece84ab56451c8718061
+# pre-commit run -a (Guilhem Saurel, 2022-10-05)
+52b83ddb4cd417732cc803bfda6435183cd7b1f4
