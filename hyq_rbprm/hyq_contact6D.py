@@ -17,7 +17,6 @@
 # <http://www.gnu.org/licenses/>.
 
 import numpy as np
-
 from hpp.corbaserver.rbprm.rbprmfullbody import FullBody as Parent
 from pinocchio import SE3
 

@@ -3,7 +3,6 @@
 from __future__ import print_function
 
 import numpy as np
-
 import quaternion as quat
 from hpp.corbaserver.rbprm.rbprmfullbody import FullBody
 
