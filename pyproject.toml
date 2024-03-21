@@ -10,7 +10,7 @@ dependencies = [
   "cmeel-boost ~= 1.83.0",
   "example-robot-data"
 ]
-description = "Utility classes for testing (robust) equilibrium of a system in contact with the environment, and other centroidal dynamics methods."
+description = "Database for hyq robot using hpp-rbprm"
 license = "BSD-2-Clause"
 name = "hyq-rbprm"
 version = "5.0.0"
