@@ -1,4 +1,5 @@
 """do the loading of the obj file"""
+
 from collections import namedtuple
 from pickle import dump, load
 
